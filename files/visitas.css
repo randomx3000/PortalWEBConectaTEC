@@ -1,0 +1,60 @@
+.form-visita{max-width:900px}
+.titulo-form{margin:0 0 1rem}
+fieldset.seccion{border:2px solid var(--border);border-left:8px solid var(--gold);border-radius:10px;padding:.5rem 1.25rem 1.25rem;margin:0 0 1.25rem;background:var(--surface)}
+fieldset.seccion legend{font-weight:700;padding:0 .5rem;font-size:1.05rem}
+.ayuda{color:var(--muted);font-size:.85rem;margin:.25rem 0 .5rem;line-height:1.4}
+.radios{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:.5rem}
+.radios label{display:flex;align-items:center;gap:.4rem;font-weight:400;margin:0}
+.radios input,.chk input{width:auto;padding:0;accent-color:var(--gold)}
+.chk{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;margin:.75rem 0 0;cursor:pointer}
+.chk input{margin-top:.2rem}
+.dia{border:1px dashed var(--border);border-radius:8px;padding:.25rem 1rem .75rem;margin-top:.75rem}
+.form-grid.tres{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.tabla-est{max-height:none}
+.tabla-est td{padding:.35rem .5rem;white-space:normal}
+.tabla-est td input{margin:0}
+.tabla-est td:first-child{width:3rem;text-align:center}
+.tabla-est td:last-child{width:3.5rem}
+.quitar{background:transparent;border:2px solid var(--border);border-radius:8px;color:var(--text);padding:.35rem .6rem;cursor:pointer;font:inherit}
+.quitar:hover:not(:disabled){border-color:#c62828;color:#c62828}
+.quitar:disabled{opacity:.4;cursor:not-allowed}
+.barra-est{display:flex;align-items:center;gap:1rem;margin-top:.85rem;flex-wrap:wrap}
+.errores{background:rgba(198,40,40,.1);border:2px solid #c62828;border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem}
+.errores ul{margin:.25rem 0 0;padding-left:1.2rem}
+.sr{position:absolute;left:-9999px}
+.dlg-botones.izq{justify-content:flex-start}
+
+/* Nota de validación GAATX / seguro facultativo */
+.nota-validacion{border-left:4px solid var(--gold);background:rgba(212,160,23,.12);padding:.6rem .8rem;border-radius:0 8px 8px 0;margin-top:1rem}
+
+/* Ruta de autorización */
+.flujo{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin:.5rem 0 1.25rem;padding:0}
+.flujo li{border:2px solid var(--border);border-radius:10px;padding:.75rem;background:var(--bg);display:flex;flex-direction:column;gap:.2rem}
+.flujo li strong{font-size:.95rem}
+.flujo li span{font-size:.8rem;color:var(--muted)}
+.flujo .chip{align-self:flex-start;margin-top:.35rem}
+.chip{display:inline-block;padding:.15rem .65rem;border-radius:999px;font-size:.78rem;font-weight:700;font-style:normal;background:#eceefc;color:#192080}
+.chip.pend{background:#fff3cd;color:#7a5a00}
+.chip.visto{background:#dbe7ff;color:#1a3f8f}
+.chip.ok{background:#d9f2e0;color:#14532d}
+.chip.no{background:#fbdada;color:#7f1d1d}
+
+/* Panel de revisiones */
+.barra-rev{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.barra-rev label{margin:0;font-size:.85rem}
+.barra-rev select{max-width:240px;margin-top:.3rem}
+#rev-detalle{margin-top:1.5rem;max-width:960px}
+#rev-detalle h3{margin:0 0 .25rem}
+#rev-detalle h4{margin:1.25rem 0 .5rem}
+.datos-rev{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 1.5rem;margin:0}
+.datos-rev div{display:flex;gap:.5rem;border-bottom:1px dashed var(--border);padding:.35rem 0}
+.datos-rev dt{font-weight:700;min-width:110px}
+.datos-rev dd{margin:0}
+.firmas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+.firma{border:2px solid var(--border);border-radius:10px;padding:1rem}
+.firma.ok{border-color:#2e7d32}
+.firma.no{border-color:#c62828}
+.firma h4{margin:0 0 .35rem}
+.acciones-rev{border-top:2px solid var(--border);margin-top:1.25rem;padding-top:.5rem}
+#aviso{position:fixed;left:50%;bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  background:var(--brand);color:#fff;border:2px solid var(--gold);border-radius:8px;padding:.7rem 1.1rem;z-index:50;max-width:90vw}

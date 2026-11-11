@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" data-modulo="residencias">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ConectaTEC – Residencias profesionales</title>
+<script src="auth.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="residencias.css">
+</head>
+<body>
+<header>
+  <h1>ConectaTEC</h1>
+  <div class="acciones">
+    <a class="enlace-inicio" href="index.html">Inicio</a>
+    <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Modo oscuro</button>
+  </div>
+</header>
+
+<main class="ancho">
+  <section class="intro">
+    <h2>Residencias profesionales</h2>
+  </section>
+
+  <!-- 1. Menú -->
+  <section id="vista-menu">
+    <p class="subtitulo">Elige una opción.</p>
+    <nav class="menu" aria-label="Opciones de residencias">
+      <button class="btn" id="ir-anadir"><strong>Añadir periodo</strong><span>Carga un Excel con los registros del periodo.</span></button>
+      <button class="btn" id="ir-visualizar"><strong>Visualizar registros</strong><span>Consulta la tabla, check list y bajas.</span></button>
+    </nav>
+  </section>
+
+  <!-- 2. Añadir periodo -->
+  <section id="vista-anadir" hidden>
+    <button class="volver" data-volver>← Volver al menú</button>
+    <div class="panel">
+      <h3>Añadir periodo</h3>
+      <p class="subtitulo">Si el periodo ya existe, el Excel se anexa: los registros nuevos se agregan y los repetidos se actualizan con los cambios.</p>
+      <label for="periodo">Periodo</label>
+      <input id="periodo" list="lista-periodos" placeholder="Ej. Enero-Junio 2026" autocomplete="off">
+      <datalist id="lista-periodos"></datalist>
+      <label for="archivo">Archivo de Excel (.xlsx, .xls o .csv)</label>
+      <input id="archivo" type="file" accept=".xlsx,.xls,.csv">
+      <p class="subtitulo">La primera fila debe tener los encabezados y debe existir una columna de matrícula (o número de control).</p>
+      <button class="accion" id="btn-cargar">Cargar archivo</button>
+      <p id="resultado" role="status"></p>
+    </div>
+  </section>
+
+  <!-- 3. Visualizar registros -->
+  <section id="vista-tabla" hidden>
+    <button class="volver" data-volver>← Volver al menú</button>
+    <div class="barra-periodo">
+      <label for="sel-periodo">Periodo</label>
+      <select id="sel-periodo"></select>
+    </div>
+
+    <div id="herramientas" hidden>
+      <div class="barra">
+        <button class="accion" id="btn-check">1. Check list</button>
+        <button class="accion peligro" id="btn-baja">2. Dar de baja</button>
+        <label class="campo-barra">3. Carrera
+          <select id="sel-carrera"></select>
+        </label>
+        <label class="campo-barra">Buscar matrícula
+          <input id="buscar" type="search" placeholder="Matrícula" autocomplete="off">
+        </label>
+      </div>
+      <p id="contador" class="subtitulo"></p>
+    </div>
+
+    <div class="tabla-wrap" id="tabla-wrap" hidden>
+      <table id="tabla"><thead></thead><tbody></tbody></table>
+    </div>
+    <p id="vacio" class="subtitulo" hidden>No hay registros. Usa «Añadir periodo» para cargar un Excel.</p>
+  </section>
+</main>
+
+<!-- Diálogo: check list -->
+<dialog id="dlg-check">
+  <h3 id="check-titulo">Check list</h3>
+  <div id="check-items" class="lista-check"></div>
+  <div class="dlg-botones">
+    <button class="accion" id="check-guardar">Guardar</button>
+    <button class="secundario" id="check-cancelar">Cancelar</button>
+  </div>
+</dialog>
+
+<!-- Diálogo: motivo de baja -->
+<dialog id="dlg-baja">
+  <h3>Dar de baja</h3>
+  <p id="baja-detalle" class="subtitulo"></p>
+  <label for="baja-motivo">Motivo de la baja</label>
+  <textarea id="baja-motivo" rows="4"></textarea>
+  <p id="baja-error" class="error" role="alert"></p>
+  <div class="dlg-botones">
+    <button class="accion" id="baja-aceptar">Aceptar</button>
+    <button class="secundario" id="baja-cancelar">Cancelar</button>
+  </div>
+</dialog>
+
+<!-- Diálogo: confirmar cambios -->
+<dialog id="dlg-confirmar">
+  <h3>Confirmar cambios</h3>
+  <p id="confirmar-texto"></p>
+  <div class="dlg-botones">
+    <button class="accion peligro" id="confirmar-si">Confirmar</button>
+    <button class="secundario" id="confirmar-no">Cancelar</button>
+  </div>
+</dialog>
+
+<div id="aviso" role="status" hidden></div>
+<footer>ConectaTEC</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="residencias.js"></script>
+</body>
+</html>

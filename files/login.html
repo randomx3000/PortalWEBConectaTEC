@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ConectaTEC – Iniciar sesión</title>
+<script src="auth.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>ConectaTEC</h1>
+  <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Modo oscuro</button>
+</header>
+
+<main class="centrado">
+  <form id="form-login" class="tarjeta-login" autocomplete="on" novalidate>
+    <h2>Iniciar sesión</h2>
+    <p class="nota">Ingresa con tu usuario y contraseña.</p>
+
+    <label for="usuario">Usuario</label>
+    <input id="usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false">
+
+    <label for="clave">Contraseña</label>
+    <input id="clave" name="clave" type="password" autocomplete="current-password">
+
+    <label class="mostrar"><input id="ver" type="checkbox"> Mostrar contraseña</label>
+
+    <p id="error" class="error-login" role="alert"></p>
+    <button class="entrar" type="submit">Entrar</button>
+  </form>
+</main>
+<footer>ConectaTEC</footer>
+<script src="login.js"></script>
+</body>
+</html>

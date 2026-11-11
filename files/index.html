@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" data-modulo="inicio">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ConectaTEC</title>
+<script src="auth.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>ConectaTEC</h1>
+  <div class="acciones">
+    <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Modo oscuro</button>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>¿Qué trámite necesitas?</h2>
+    <p>Elige un área para continuar.</p>
+  </section>
+  <nav class="menu" aria-label="Áreas de ConectaTEC">
+    <button class="btn" data-destino="servicio-social"><strong>Servicio social</strong><span>Registro y seguimiento de tu servicio social.</span></button>
+    <button class="btn" data-destino="residencias"><strong>Residencias</strong><span>Residencias profesionales y proyectos.</span></button>
+    <button class="btn" data-destino="visitas-academicas"><strong>Visitas académicas</strong><span>Solicita y organiza visitas a empresas.</span></button>
+    <button class="btn" data-destino="convenios"><strong>Convenios</strong><span>Consulta y gestiona convenios vigentes.</span></button>
+  </nav>
+</main>
+<footer>ConectaTEC</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" data-modulo="visitas-academicas">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ConectaTEC – Visitas académicas</title>
+<script src="auth.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="residencias.css">
+<link rel="stylesheet" href="visitas.css">
+</head>
+<body>
+<header>
+  <h1>ConectaTEC</h1>
+  <div class="acciones">
+    <a class="enlace-inicio" href="index.html">Inicio</a>
+    <button id="tema" type="button" aria-label="Cambiar entre modo claro y oscuro">Modo oscuro</button>
+  </div>
+</header>
+
+<main class="ancho">
+  <section class="intro"><h2>Visitas académicas</h2></section>
+
+  <!-- Menú -->
+  <section id="vista-menu">
+    <p class="subtitulo">Elige una opción.</p>
+    <nav class="menu" aria-label="Opciones de visitas académicas">
+      <button class="btn" id="ir-solicitud"><strong>Solicitud de visita</strong><span>Captura los datos para solicitar una visita académica.</span></button>
+      <button class="btn" id="ir-revisiones" hidden><strong>Revisiones pendientes</strong><span>Registra el visto bueno de la Jefatura o la autorización de la Subdirección.</span></button>
+    </nav>
+  </section>
+
+  <!-- Formulario de solicitud -->
+  <section id="vista-solicitud" hidden>
+    <button class="volver" data-volver>← Volver al menú</button>
+    <form id="form-solicitud" class="form-visita" novalidate>
+      <h3 class="titulo-form">Solicitud de visita académica</h3>
+
+      <fieldset class="seccion">
+        <legend>1. Datos del docente y adscripción</legend>
+        <div class="form-grid">
+          <div class="completo"><label for="s-docente">Nombre completo del docente solicitante</label><input id="s-docente" autocomplete="name"></div>
+          <div class="completo"><label for="s-jefatura">Jefatura de División de Carrera a la que pertenece</label><select id="s-jefatura"></select></div>
+          <div class="completo"><label for="s-academia">Academia a la que corresponde la materia</label><input id="s-academia" autocomplete="off"></div>
+          <div><label for="s-asignatura">Nombre exacto de la asignatura</label><input id="s-asignatura" autocomplete="off"></div>
+          <div><label for="s-programa">Programa educativo</label><select id="s-programa"></select></div>
+        </div>
+      </fieldset>
+
+      <fieldset class="seccion">
+        <legend>2. Justificación académica y cumplimiento normativo</legend>
+        <label for="s-objetivo">Objetivo de la visita</label>
+        <p class="ayuda">¿Qué conocimientos y experiencias académicas adquirirá el estudiante en la organización?</p>
+        <textarea id="s-objetivo" rows="4"></textarea>
+
+        <label for="s-justificacion">Justificación de impacto curricular</label>
+        <p class="ayuda">¿Cómo impacta la visita en el contenido temático y las competencias de la asignatura?</p>
+        <textarea id="s-justificacion" rows="4"></textarea>
+
+        <div class="form-grid">
+          <div>
+            <label for="s-impacto">Porcentaje de impacto curricular (%)</label>
+            <input id="s-impacto" type="number" min="50" max="100" step="1" placeholder="Mínimo 50">
+            <p class="ayuda">Requisito normativo: justificar al menos el 50 %.</p>
+          </div>
+        </div>
+
+        <label class="chk"><input id="s-limite" type="checkbox"><span>Declaro que la visita no excede el máximo permitido de hasta dos visitas por semestre por academia.</span></label>
+        <label class="chk"><input id="s-adicional" type="checkbox"><span>Es una visita adicional porque imparto clase en otra academia (opcional).</span></label>
+      </fieldset>
+
+      <fieldset class="seccion">
+        <legend>3. Logística y datos de la empresa destino</legend>
+        <div class="form-grid">
+          <div class="completo"><label for="s-empresa">Nombre o razón social de la empresa, industria u organización</label><input id="s-empresa" autocomplete="off"></div>
+          <div class="completo"><label for="s-ubicacion">Ubicación o dirección de la organización</label><input id="s-ubicacion" autocomplete="off"></div>
+          <div><label for="s-modalidad">Modalidad</label>
+            <select id="s-modalidad"><option value="">Selecciona…</option><option>PRESENCIAL</option><option>VIRTUAL</option></select></div>
+          <div><label id="lbl-duracion">Duración estimada</label>
+            <div class="radios" role="radiogroup" aria-labelledby="lbl-duracion">
+              <label><input type="radio" name="duracion" value="1" checked> 1 día</label>
+              <label><input type="radio" name="duracion" value="2"> 2 días (máximo)</label>
+            </div></div>
+        </div>
+
+        <p class="ayuda">Propuesta de fechas y horarios tentativos, para que el Departamento de Residencias Profesionales gestione el oficio de solicitud ante la empresa.</p>
+        <div class="dia">
+          <div class="form-grid tres">
+            <div><label for="s-f1">Fecha (día 1)</label><input id="s-f1" type="date"></div>
+            <div><label for="s-h1i">Hora de salida / inicio</label><input id="s-h1i" type="time"></div>
+            <div><label for="s-h1f">Hora de regreso / fin</label><input id="s-h1f" type="time"></div>
+          </div>
+        </div>
+        <div class="dia" id="dia2" hidden>
+          <div class="form-grid tres">
+            <div><label for="s-f2">Fecha (día 2)</label><input id="s-f2" type="date"></div>
+            <div><label for="s-h2i">Hora de salida / inicio</label><input id="s-h2i" type="time"></div>
+            <div><label for="s-h2f">Hora de regreso / fin</label><input id="s-h2f" type="time"></div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="seccion">
+        <legend>4. Listado de estudiantes asistentes</legend>
+        <div class="tabla-wrap tabla-est">
+          <table>
+            <thead><tr><th>No.</th><th>Número de control</th><th>Nombre completo del estudiante</th><th><span class="sr">Quitar</span></th></tr></thead>
+            <tbody id="est-cuerpo"></tbody>
+          </table>
+        </div>
+        <div class="barra-est">
+          <button class="secundario" id="est-agregar" type="button">+ Agregar estudiante</button>
+          <span id="est-total" class="ayuda"></span>
+        </div>
+        <p class="ayuda nota-validacion">Estos datos son indispensables para que el Departamento de Control Escolar valide en el portal <strong>GAATX</strong> que la asignatura y el docente coincidan con la visita, y que los alumnos tengan su <strong>seguro facultativo vigente</strong>.</p>
+      </fieldset>
+
+      <fieldset class="seccion">
+        <legend>5. Flujo digital de vistos buenos y autorización</legend>
+        <ol class="flujo" aria-label="Ruta de autorización de la visita">
+          <li><strong>1. Solicitud</strong><span>Docente solicitante</span><em class="chip visto">En captura</em></li>
+          <li><strong>2. Visto bueno</strong><span>Jefatura de División</span><em class="chip pend">Pendiente</em></li>
+          <li><strong>3. Autorización</strong><span>Subdirección Académica</span><em class="chip pend">Pendiente</em></li>
+          <li><strong>4. Envío</strong><span>Residencias Profesionales</span><em class="chip pend">Pendiente</em></li>
+        </ol>
+        <div class="form-grid">
+          <div>
+            <label for="s-correo-jefatura">Correo institucional de la Jefatura de División</label>
+            <input id="s-correo-jefatura" type="email" autocomplete="off" placeholder="nombre@dominio.edu.mx">
+          </div>
+          <div>
+            <label for="s-correo-subdireccion">Correo institucional de la Subdirección Académica</label>
+            <input id="s-correo-subdireccion" type="email" autocomplete="off" placeholder="nombre@dominio.edu.mx">
+          </div>
+        </div>
+        <p class="ayuda">La Jefatura de División revisará la solicitud y registrará su <strong>Aprobar / Visto Bueno</strong>; después la Subdirección Académica la <strong>autorizará</strong> para enviarla al Departamento de Residencias Profesionales y Servicio Social. Cada firma digital se valida con el nombre y el correo institucional de quien revisa.</p>
+      </fieldset>
+
+      <div id="s-errores" class="errores" role="alert" hidden></div>
+      <button class="accion" id="s-enviar" type="button">Enviar solicitud</button>
+    </form>
+  </section>
+
+  <!-- Revisiones: Jefatura de División / Subdirección Académica -->
+  <section id="vista-revisiones" hidden>
+    <button class="volver" data-volver>← Volver al menú</button>
+    <h3>Revisiones de visitas académicas</h3>
+    <p class="subtitulo" id="rev-rol"></p>
+    <div class="barra-rev">
+      <label for="rev-filtro">Estado
+        <select id="rev-filtro">
+          <option value="">Todas</option>
+          <option value="PENDIENTE">Pendientes</option>
+          <option value="VISTO BUENO">Con visto bueno</option>
+          <option value="AUTORIZADA">Autorizadas</option>
+          <option value="RECHAZADA">Rechazadas</option>
+        </select>
+      </label>
+      <span id="rev-contador" class="ayuda"></span>
+    </div>
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Folio</th><th>Docente</th><th>Asignatura</th><th>Empresa</th><th>Fecha(s)</th><th>Est.</th><th>Estado</th><th><span class="sr">Acción</span></th></tr></thead>
+        <tbody id="rev-cuerpo"></tbody>
+      </table>
+    </div>
+    <p id="rev-vacio" class="subtitulo" hidden>No hay solicitudes que mostrar.</p>
+    <div id="rev-detalle" class="panel ancha" hidden></div>
+  </section>
+
+  <!-- Confirmación -->
+  <section id="vista-listo" hidden>
+    <div class="panel">
+      <h3>Solicitud registrada</h3>
+      <p id="listo-texto" class="subtitulo"></p>
+      <div class="dlg-botones izq">
+        <button class="accion" id="listo-pdf" type="button">Descargar PDF</button>
+        <button class="secundario" id="listo-nueva" type="button">Nueva solicitud</button>
+      </div>
+    </div>
+  </section>
+</main>
+<p id="aviso" hidden></p>
+<footer>ConectaTEC</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="visitas.js"></script>
+</body>
+</html>
